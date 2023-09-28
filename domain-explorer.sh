@@ -182,4 +182,3 @@ function echoerr {
 parse_args "$@"
 main
 
-echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" >> OUTPUT
