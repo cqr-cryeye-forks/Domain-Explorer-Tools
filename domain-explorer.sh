@@ -1,13 +1,5 @@
 #!/bin/bash
 
-#------------------------------------------------------------------------------------------------------------
-# Program to locate and solve intern domains of a given website
-#
-# This code is under the GPLv3 license. See LICENSE for more informations
-#
-# Developer - Giovani Ferreira
-#------------------------------------------------------------------------------------------------------------
-
 SEPARATOR=":"           # This is the separator for the output. Default will be <domain>:<ip>
 OUTPUT="hosts.txt"      # The file to write the output
 URL=""                  # The url to explore
