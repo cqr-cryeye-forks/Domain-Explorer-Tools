@@ -28,7 +28,9 @@ function main(){
     ping -q -c1 $URL > /dev/null 2> /dev/null                   # Check if the url is a valid url
 
     if [ $? -ne 0 ]; then                                       # Finish script with error if the url is unreachable
+        echo -e "" | tee -a $OUTPUT
         error_with_message "Unreachable url $URL. Aborting..."
+
     fi
 
     if ! $QUIET; then
