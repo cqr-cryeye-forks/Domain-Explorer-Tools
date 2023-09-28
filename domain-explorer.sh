@@ -72,6 +72,7 @@ function main(){
     echo "==> Hosts are in $OUTPUT!"
 
 #    echo -e "\nDomain exploration finished in $(date)" | tee -a $OUTPUT
+    echo -e "" | tee -a $OUTPUT
 
     return 0
 }
