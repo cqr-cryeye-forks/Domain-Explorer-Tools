@@ -1,7 +1,7 @@
 # Domain Explorer Tools
 A collection of some useful bash scripts for information gathering and domain exploration.  
 
-- [Domain Explorer](domain-explorer/DOMAIN-EXPLORER.md):  
+- [Domain Explorer](DOMAIN-EXPLORER.md):  
 Download the ```index.html```, collect all subdomains found in links and resolve them.  
 - [Brute Force Subdomain](bf-subdomain/BF-SUBDOMAIN.md):  
 Read from a wordlist and try every word as subdomain in the domain.  

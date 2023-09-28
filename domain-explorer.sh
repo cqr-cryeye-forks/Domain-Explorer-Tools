@@ -2,8 +2,8 @@
 
 #------------------------------------------------------------------------------------------------------------
 # Program to locate and solve intern domains of a given website
-# 
-# This code is under the GPLv3 license. See LICENSE for more informations 
+#
+# This code is under the GPLv3 license. See LICENSE for more informations
 #
 # Developer - Giovani Ferreira
 #------------------------------------------------------------------------------------------------------------
@@ -19,7 +19,7 @@ NOTSOLVE=false          # To keep all domains without trying to solve ip's
 
 # This function performs the actions to explore a given domain
 function main(){
-    echo -e "Domain exploration started in $(date)\n" | tee -a $OUTPUT
+#    echo -e "Domain exploration started in $(date)\n" | tee -a $OUTPUT
 
     if ! $QUIET; then
         echo "==> Checking $URL..."                             # User feedback
@@ -72,12 +72,12 @@ function main(){
     else
         mv $DOMAINS $OUTPUT                                     # Outputs the domains without looking for ip's
     fi
-    
+
     rm $DOMAINS index.html 2> /dev/null                         # Cleaning the auxiliary files
-    
+
     echo "==> Hosts are in $OUTPUT!"
 
-    echo -e "\nDomain exploration finished in $(date)" | tee -a $OUTPUT
+#    echo -e "\nDomain exploration finished in $(date)" | tee -a $OUTPUT
 
     return 0
 }
@@ -91,7 +91,7 @@ function parse_args(){
 
     while (( "$#" )); do            # Stays in the loop as long as the number of parameters is greater than 0
         case $1 in                  # Switch through cases to see what arg was passed
-            -V|--version) 
+            -V|--version)
                 echo ":: Author: Giovani Ferreira"
                 echo ":: Source: https://github.com/giovanifss/Domain-Explorer-Tools"
                 echo ":: License: GPLv3"
@@ -111,7 +111,7 @@ function parse_args(){
                 fi
                 QUIET=true;;
 
-            -v|--verbose)           # Set the program opeartion mode to verbose 
+            -v|--verbose)           # Set the program opeartion mode to verbose
                 if $QUIET; then     # Program can not behave quiet and verbose at same time
                     error_with_message "Operation mode can not be quiet and verbose at the same time"
                 fi
@@ -184,5 +184,5 @@ function echoerr {
 #   - Parse arguments
 #   - Gather information from url
 #-----------------------------------------------------------------------------------------------------------------------------
-parse_args $@
+parse_args "$@"
 main
