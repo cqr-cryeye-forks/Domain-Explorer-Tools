@@ -13,23 +13,23 @@ NOTSOLVE=false          # To keep all domains without trying to solve ip's
 function main(){
 #    echo -e "Domain exploration started in $(date)\n" | tee -a $OUTPUT
 
-    if ! $QUIET; then
-        echo "==> Checking $URL..."                             # User feedback
-    fi
+    # if ! $QUIET; then
+    #     echo "==> Checking $URL..."                             # User feedback
+    # fi
 
-    ping -q -c1 $URL > /dev/null 2> /dev/null                   # Check if the url is a valid url
+    # ping -q -c1 $URL > /dev/null 2> /dev/null                   # Check if the url is a valid url
 
-    if [ $? -ne 0 ]; then                                       # Finish script with error if the url is unreachable
-        echo -e "" | tee -a $OUTPUT
-        error_with_message "Unreachable url $URL. Aborting..."
+    # if [ $? -ne 0 ]; then                                       # Finish script with error if the url is unreachable
+    #     echo -e "" | tee -a $OUTPUT
+    #     error_with_message "Unreachable url $URL. Aborting..."
 
-    fi
+    # fi
 
     if ! $QUIET; then
         echo "==> Downloading index file..."                    # Starting downloading the index.html file
     fi
 
-    wget "https://$URL" --no-check-certificate --tries=3
+    wget $URL --no-check-certificate --tries=2
     
     if ! $QUIET; then
         echo "==> Searching for internal domains..."
