@@ -29,9 +29,8 @@ function main(){
         echo "==> Downloading index file..."                    # Starting downloading the index.html file
     fi
 
-    wget $URL --no-check-certificate
-    echo wget $URL --no-check-certificate
-
+    wget "https://$URL" --no-check-certificate --tries=5
+    
     if ! $QUIET; then
         echo "==> Searching for internal domains..."
     fi
