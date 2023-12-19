@@ -26,25 +26,17 @@ function main(){
     fi
 
     if ! $QUIET; then
-    echo "==> Downloading index file..."                    # Starting downloading the index.html file
-fi
-
-if wget $URL --no-check-certificate --tries=2 --connect-timeout=15 --ignore-case --verbose; then
-    if ! $QUIET; then
-        echo "==> Searching for internal domains..."
+        echo "==> Downloading index file..."                    # Starting downloading the index.html file
     fi
 
-else
-    echo "==> HTTP download failed, trying HTTPS..."
-    if wget "https://$URL" --no-check-certificate --tries=2 --connect-timeout=15 --ignore-case --verbose; then
-        if ! $QUIET; then
-            echo "==> Searching for internal domains..."
-        fi
+    wget $URL --no-check-certificate --tries=2 --connect-timeout=15 --ignore-case
+    echo "==> Check 80 port/HTTP for domain..."
     
-    else
-        echo "==> Both HTTP and HTTPS downloads failed."
-        echo "==> Exiting due to download failure."
-        return 0
+    wget "$URL:443" --no-check-certificate --tries=2 --connect-timeout=15 --ignore-case 
+    echo "==> Check 443 port/HTTPS for domain..."
+    
+    if ! $QUIET; then
+        echo "==> Searching for internal domains..."
     fi
 
     # Cleaning the html file:
@@ -193,4 +185,3 @@ function echoerr {
 #-----------------------------------------------------------------------------------------------------------------------------
 parse_args "$@"
 main
-
