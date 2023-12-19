@@ -13,26 +13,38 @@ NOTSOLVE=false          # To keep all domains without trying to solve ip's
 function main(){
 #    echo -e "Domain exploration started in $(date)\n" | tee -a $OUTPUT
 
-    # if ! $QUIET; then
-    #     echo "==> Checking $URL..."                             # User feedback
-    # fi
-
-    # ping -q -c1 $URL > /dev/null 2> /dev/null                   # Check if the url is a valid url
-
-    # if [ $? -ne 0 ]; then                                       # Finish script with error if the url is unreachable
-    #     echo -e "" | tee -a $OUTPUT
-    #     error_with_message "Unreachable url $URL. Aborting..."
-
-    # fi
-
     if ! $QUIET; then
-        echo "==> Downloading index file..."                    # Starting downloading the index.html file
+        echo "==> Checking $URL..."                             # User feedback
     fi
 
-    wget $URL --no-check-certificate --tries=2
-    
+    ping -q -c1 $URL > /dev/null 2> /dev/null                   # Check if the url is a valid url
+
+    if [ $? -ne 0 ]; then                                       # Finish script with error if the url is unreachable
+        echo -e "" | tee -a $OUTPUT
+        error_with_message "Unreachable url $URL. Aborting..."
+
+    fi
+
+    if ! $QUIET; then
+    echo "==> Downloading index file..."                    # Starting downloading the index.html file
+fi
+
+if wget $URL --no-check-certificate --tries=2 --connect-timeout=15 --ignore-case --verbose; then
     if ! $QUIET; then
         echo "==> Searching for internal domains..."
+    fi
+
+else
+    echo "==> HTTP download failed, trying HTTPS..."
+    if wget "https://$URL" --no-check-certificate --tries=2 --connect-timeout=15 --ignore-case --verbose; then
+        if ! $QUIET; then
+            echo "==> Searching for internal domains..."
+        fi
+    
+    else
+        echo "==> Both HTTP and HTTPS downloads failed."
+        echo "==> Exiting due to download failure."
+        return 0
     fi
 
     # Cleaning the html file:
