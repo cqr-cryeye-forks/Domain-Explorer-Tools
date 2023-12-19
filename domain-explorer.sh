@@ -28,12 +28,12 @@ function main(){
     if ! $QUIET; then
         echo "==> Downloading index file..."                    # Starting downloading the index.html file
     fi
-
-    wget $URL --no-check-certificate --tries=2 --connect-timeout=15 --ignore-case
-    echo "==> Check 80 port/HTTP for domain..."
     
-    wget "$URL:443" --no-check-certificate --tries=2 --connect-timeout=15 --ignore-case 
-    echo "==> Check 443 port/HTTPS for domain..."
+    echo "==> Check HTTP for domain..."
+    wget "http://$URL" --no-check-certificate --tries=2 --connect-timeout=15 --ignore-case
+
+    echo "==> Check HTTPS for domain..."
+    wget "https://$URL" --no-check-certificate --tries=2 --connect-timeout=15 --ignore-case 
     
     if ! $QUIET; then
         echo "==> Searching for internal domains..."
