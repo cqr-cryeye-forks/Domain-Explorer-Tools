@@ -29,7 +29,7 @@ function main(){
         echo "==> Downloading index file..."                    # Starting downloading the index.html file
     fi
 
-    wget -q $URL
+    wget -q $URL --no-check-certificate
 
     if ! $QUIET; then
         echo "==> Searching for internal domains..."
